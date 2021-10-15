@@ -26,7 +26,7 @@
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(PackGlobalTool)' != true">
-    <TargetFrameworks>netcoreapp5;net48</TargetFrameworks>
+    <TargetFrameworks>netcoreapp5</TargetFrameworks>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(PackGlobalTool)' == true">
@@ -63,7 +63,7 @@
     </None>
     <None Include="..\lib\stdfu\**" Link="stdfu\%(RecursiveDir)%(Filename)%(Extension)" CopyToOutputDirectory="Always">
 	    <Pack>true</Pack>
-        <PackagePath>content\stdfu;contentFiles\stdfu</PackagePath>
+        <PackagePath>content\stdfu</PackagePath>
 	</None>
     <None Include="..\LICENSE.md">
       <Pack>True</Pack>
@@ -74,22 +74,42 @@
   <ItemGroup>
     <None Include="..\lib\esptool\**" Link="esptool\%(RecursiveDir)%(Filename)%(Extension)" CopyToOutputDirectory="Always">
 	    <Pack>true</Pack>
-        <PackagePath>content\esptool;contentFiles\esptool</PackagePath>
-	</None>
+        <PackagePath>content\esptool</PackagePath>
+	  </None>
+    <None Include="..\lib\esptool\esptoolMac\**" Link="esptool\esptoolMac\%(RecursiveDir)%(Filename)%(Extension)" CopyToOutputDirectory="Always">
+	    <Pack>true</Pack>
+        <PackagePath>content\esptool\esptoolMac</PackagePath>
+	  </None>
+    <None Include="..\lib\esptool\esptoolWin\**" Link="esptool\esptoolWin\%(RecursiveDir)%(Filename)%(Extension)" CopyToOutputDirectory="Always">
+	    <Pack>true</Pack>
+        <PackagePath>content\esptool\esptoolWin</PackagePath>
+	  </None>
+    <None Include="..\lib\esptool\esptoolLinux\**" Link="esptool\esptooLinux\%(RecursiveDir)%(Filename)%(Extension)" CopyToOutputDirectory="Always">
+	    <Pack>true</Pack>
+        <PackagePath>content\esptool\esptoolWin</PackagePath>
+	  </None>
   </ItemGroup>
 
   <ItemGroup>
     <None Include="..\lib\stlink\**" Link="stlink\%(RecursiveDir)%(Filename)%(Extension)" CopyToOutputDirectory="Always">
 	    <Pack>true</Pack>
-        <PackagePath>content\stlink;contentFiles\stlink</PackagePath>
-	</None>
+        <PackagePath>content\stlink</PackagePath>
+	  </None>
+    <None Include="..\lib\stlinkMac\**" Link="stlinkMac\%(RecursiveDir)%(Filename)%(Extension)" CopyToOutputDirectory="Always">
+	    <Pack>true</Pack>
+        <PackagePath>content\stlinkMac</PackagePath>
+	  </None>
+      <None Include="..\lib\stlinkLinux\**" Link="stlinkLinux\%(RecursiveDir)%(Filename)%(Extension)" CopyToOutputDirectory="Always">
+	    <Pack>true</Pack>
+        <PackagePath>content\stlinkLinux</PackagePath>
+	  </None>
   </ItemGroup>
 
   <ItemGroup>
     <None Include="..\lib\uniflash\**" Link="uniflash\%(RecursiveDir)%(Filename)%(Extension)" CopyToOutputDirectory="Always">
 	    <Pack>true</Pack>
-        <PackagePath>content\uniflash;contentFiles\uniflash</PackagePath>
-	</None>
+        <PackagePath>content\uniflash</PackagePath>
+	  </None>
   </ItemGroup>
 
 </Project>

@@ -263,15 +263,29 @@ jobs:
   # push NuGet class lib package to NuGet (happens on all builds except PRs)
   - task: NuGetCommand@2
     condition: and( succeeded(), eq(variables['System.PullRequest.PullRequestId'], ''), not( startsWith(variables['Build.SourceBranch'], 'refs/tags/v') ) )
-    displayName: Push NuGet packages to NuGet
+    displayName: Push nanoff NuGet package to NuGet
     continueOnError: true
     inputs:
       command: push
+      feedsToUse: select
       nuGetFeedType: external
       allowPackageConflicts: true
-      packagesToPush: '$(Build.ArtifactStagingDirectory)/*.nupkg'
+      packagesToPush: '$(Build.ArtifactStagingDirectory)\nanoff.$(NBGV_NuGetPackageVersion).nupkg'
       publishFeedCredentials: 'NuGet-nanoFirmwareFlasher'
 
+  # push NuGet class lib package to NuGet (happens on all builds except PRs)
+  - task: NuGetCommand@2
+    condition: and( succeeded(), eq(variables['System.PullRequest.PullRequestId'], ''), not( startsWith(variables['Build.SourceBranch'], 'refs/tags/v') ) )
+    displayName: Push library NuGet package to NuGet
+    continueOnError: true
+    inputs:
+      command: push
+      feedsToUse: select
+      nuGetFeedType: external
+      allowPackageConflicts: true
+      packagesToPush: '$(Build.ArtifactStagingDirectory)\nanoFramework.Tools.FirmwareFlasher.$(NBGV_NuGetPackageVersion).nupkg'
+      publishFeedCredentials: 'NuGet-nanoFirmwareFlasher'
+    
   # create or update GitHub release
   - task: GithubRelease@1
     condition: and( succeeded(), eq(variables['System.PullRequest.PullRequestId'], ''), not( startsWith(variables['Build.SourceBranch'], 'refs/tags/v') ) )
@@ -283,8 +297,7 @@ jobs:
       title: 'nano firmware flasher v$(MY_NUGET_VERSION)'
       releaseNotesSource: inline
       releaseNotesInline: 'add description here'
-      assets: '$(Build.ArtifactStagingDirectory)/*.nupkg'
-      assetUploadMode: replace
+      assets: ''
       isPreRelease: true
       addChangeLog: false
 
@@ -299,8 +312,7 @@ jobs:
       title: 'nano firmware flasher v$(MY_NUGET_VERSION)'
       releaseNotesSource: inline
       releaseNotesInline: 'add description here'
-      assets: '$(Build.ArtifactStagingDirectory)/*.nupkg'
-      assetUploadMode: replace
+      assets: '' 
       isPreRelease: false
       addChangeLog: false
       action: edit
